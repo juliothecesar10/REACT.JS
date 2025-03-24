@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<h1>Arrow Function</h1>
+
+		<p>O <strong>this</strong> representa o cabeçalho do objeto.</p>
+		<button id="btn">Click !</button>
+		<p><strong>this</strong> representa:</p>
+		<p id="demo"></p>
+ 
+		<script>
+			class Header {
+			  constructor() {
+				this.color = "Red";
+			  }
+
+			  imprimaObjeto = () => {
+				document.getElementById("demo").innerHTML += this;
+			  }
+			}
+
+			myheader = new Header();
+
+			//O objeto window chama a função:
+			window.addEventListener("load", myheader.imprimaObjeto);
+
+			//O objeto botão chama a função:
+			document.getElementById("btn").addEventListener("click", myheader.imprimaObjeto);
+		</script>
+
+	</body>
+</html>

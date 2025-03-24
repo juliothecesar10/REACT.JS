@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!-- Naouse esta linha em produção: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="mydiv"></div>
+
+    <script type="text/babel">
+      class App extends React.Component {
+        handleEvent = (event) => {
+          alert("Foi clicado...");
+        };
+
+        render() {
+          return (
+            <div>
+              <button onClick={this.handleEvent}>Clique aqui</button>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<App />, document.getElementById("mydiv"));
+    </script>
+  </body>
+</html>
