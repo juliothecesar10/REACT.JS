@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!-- Naouse esta linha em produção: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+      class App extends React.Component {
+        render() {
+          return (
+            <div>
+              <Person name="kapil" eyeColor="Azul" age="23"></Person>
+              <Person name="Sachin" eyeColor="Azul"></Person>
+              <Person name="Nikhil" age="23"></Person>
+              <Person eyeColor="Verde" age="23"></Person>
+            </div>
+          );
+        }
+      }
+
+      class Person extends React.Component {
+        render() {
+          return (
+            <div>
+              <p>Nome: {this.props.name} </p>
+              <p>Olhos: {this.props.eyeColor}</p>
+              <p>Age : {this.props.age} </p>
+            </div>
+          );
+        }
+      }
+
+      Person.defaultProps = {
+        name: "Raul",
+        eyeColor: "Preto",
+        age: "45",
+      };
+
+      ReactDOM.render(<App />, document.getElementById("app"));
+    </script>
+  </body>
+</html>

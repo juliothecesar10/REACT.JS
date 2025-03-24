@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!-- Naouse esta linha em produção: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      class Car extends React.Component {
+        render() {
+          var cor;
+          var placa;
+          return <h2>Eu sou o {this.props.brand.model}!</h2>;
+        }
+      }
+
+      class Garage extends React.Component {
+        render() {
+          const carinfo = { name: "Ford", model: "Mustang" };
+          return (
+            <div>
+              <h1>Quem mora na minha garagem?</h1>
+              <Car brand={carinfo} />
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<Garage />, document.getElementById("root"));
+    </script>
+  </body>
+</html>
