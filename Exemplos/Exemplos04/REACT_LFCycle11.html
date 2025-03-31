@@ -1,67 +1,61 @@
 <!DOCTYPE html>
 <html>
-  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-  
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
   <body>
     <div id="root"></div>
 
     <script type="text/babel">
-		class Test extends React.Component { 
-			constructor(props) 
-			{ 
-				super(props); 
-				this.state = { hello : " World!" }; 
-			} 
+      class Test extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { hello: " World!" };
+        }
 
-			componentWillMount() 
-			{ 
-				console.log("componentWillMount()"); 
-			} 
+        componentWillMount() {
+          console.log("componentWillMount()");
+        }
 
-			componentDidMount() 
-			{ 
-				console.log("componentDidMount()"); 
-			} 
+        componentDidMount() {
+          console.log("componentDidMount()");
+        }
 
-			changeState() 
-			{ 
-				this.setState({ hello : " Mundo!" }); 
-			} 
+        changeState() {
+          this.setState({ hello: " Mundo!" });
+        }
 
-			render() 
-			{ 
-				return ( 
-					<div> 
-						<h1>Ciclo de Vida do REACT, Hello{ this.state.hello }</h1> 
-						<h2> 
-						<a onClick={this.changeState.bind(this)}>Press Here!</a> 
-						</h2> 
-						<br /> <br />
-						<p>Abra o console para ver o ciclo de vida em ação</p> 
-					</div>); 
-			} 
+        render() {
+          return (
+            <div>
+              <h1>Ciclo de Vida do REACT, Hello{this.state.hello}</h1>
+              <h2>
+                <a onClick={this.changeState.bind(this)}>Press Here!</a>
+              </h2>
+              <br /> <br />
+              <p>Abra o console para ver o ciclo de vida em ação</p>
+            </div>
+          );
+        }
 
-			shouldComponentUpdate(nextProps, nextState) 
-			{ 
-				console.log("shouldComponentUpdate()"); 
-				return true; 
-			} 
+        shouldComponentUpdate(nextProps, nextState) {
+          console.log("shouldComponentUpdate()");
+          return true;
+        }
 
-			componentWillUpdate() 
-			{ 
-				console.log("componentWillUpdate()"); 
-			} 
+        componentWillUpdate() {
+          console.log("componentWillUpdate()");
+        }
 
-			componentDidUpdate() 
-			{ 
-				console.log("componentDidUpdate()"); 
-			} 
-		} 
+        componentDidUpdate() {
+          console.log("componentDidUpdate()");
+        }
+      }
 
-		ReactDOM.render(<Test />,document.getElementById('root')); 
-
+      ReactDOM.render(<Test />, document.getElementById("root"));
     </script>
   </body>
 </html>

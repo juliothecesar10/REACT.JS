@@ -1,58 +1,61 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
-		<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
-		<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-	</head>
-	<body>
-		<div id="root"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
 
-		<script type="text/babel">
-			class App extends React.Component {
-			  constructor(props) {
-				super(props);
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor(props) {
+          super(props);
 
-				this.state = {
-				  isShow: true,
-				};
-			  }
+          this.state = {
+            isShow: true,
+          };
+        }
 
-			  toggleShow = () => {
-				this.setState((state) => ({ isShow: !state.isShow }));
-			  };
+        toggleShow = () => {
+          this.setState((state) => ({ isShow: !state.isShow }));
+        };
 
-			  render() {
-				return (
-				  <div>
-					<ChildComponent isShow={this.state.isShow} clickMe={this.toggleShow} />
-				  </div>
-				);
-			  }
-			}
+        render() {
+          return (
+            <div>
+              <ChildComponent
+                isShow={this.state.isShow}
+                clickMe={this.toggleShow}
+              />
+            </div>
+          );
+        }
+      }
 
-			class ChildComponent extends React.Component {
-			
-			  clickMe = () => {
-				this.props.clickMe();
-			  };
+      class ChildComponent extends React.Component {
+        clickMe = () => {
+          this.props.clickMe();
+        };
 
-			  render() {
-				const greeting = "Bem vindo aos Props do React";
-				return (
-				  <div style={{ textAlign: "center", marginTop: "8rem" }}>
-					{this.props.isShow ? (
-					  <h1 style={{ color: "green", fontSize: "4rem" }}>{greeting}</h1>
-					) : null}
-					<button onClick={this.clickMe}>
-					  <h3>click Me</h3>
-					</button>
-				  </div>
-				);
-			  }
-			}
+        render() {
+          const greeting = "Bem vindo aos Props do React";
+          return (
+            <div style={{ textAlign: "center", marginTop: "8rem" }}>
+              {this.props.isShow ? (
+                <h1 style={{ color: "green", fontSize: "4rem" }}>{greeting}</h1>
+              ) : null}
+              <button onClick={this.clickMe}>
+                <h3>click Me</h3>
+              </button>
+            </div>
+          );
+        }
+      }
 
-			ReactDOM.render(<App />, document.getElementById("root"));
-		</script>
-	</body>
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
 </html>

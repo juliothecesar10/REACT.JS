@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html>
-  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-  
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
   <body>
     <div id="app"></div>
 
     <script type="text/babel">
-		class Car extends React.Component {
-		  constructor(props) {
-			super(props);
-			this.state = {
-			  brand: "Ford",
-			  model: "Mustang",
-			  color: "red",
-			  year: 1964
-			};
-		  }
-		  render() {
-			return (
-			  <div>
-				<h1>My Car</h1>
-			  </div>
-			);
-		  }
-		}
-		
-		ReactDOM.render(<Car/>, document.getElementById('app'));
+      class Car extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            brand: "Ford",
+            model: "Mustang",
+            color: "red",
+            year: 1964,
+          };
+        }
+        render() {
+          return (
+            <div>
+              <h1>My Car</h1>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<Car />, document.getElementById("app"));
     </script>
   </body>
 </html>
