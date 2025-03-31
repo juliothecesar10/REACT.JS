@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+      ul {
+        font-family: monospace;
+        font-size: 1em;
+        list-style: none;
+        margin: 2em;
+        padding: 0;
+      }
+      li {
+        margin: 0;
+        margin-bottom: 1em;
+        padding-left: 1.5em;
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const postsList = [
+        {
+          id: 1,
+          content: "O mundo sairá da pandemia em breve",
+          user: "Zé Mané",
+        },
+        {
+          id: 2,
+          content: "Estou realmente feliz, vou me casar em breve",
+          user: "Rebeca Santos",
+        },
+        {
+          id: 3,
+          content: "Qual sua opinião sobre a pandemia?",
+          user: "João Ninguém",
+        },
+        {
+          id: 4,
+          content: "O mundo está realmente chegando ao fim",
+          user: "Davi Marcelo",
+        },
+      ];
+
+      const App = () => {
+        return (
+          <div>
+            <PostList posts={postsList} />
+          </div>
+        );
+      };
+
+      class PostList extends React.Component {
+        render() {
+          return (
+            <div>
+              <h1>Ultimas Postagens</h1>
+              <ul>
+                {this.props.posts.map((post) => {
+                  return (
+                    <li key={post.id}>
+                      <Post {...post} />
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          );
+        }
+      }
+
+      const Post = (props) => {
+        return (
+          <div>
+            <h2>{props.content}</h2>
+            <h4>username: {props.user}</h4>
+          </div>
+        );
+      };
+
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

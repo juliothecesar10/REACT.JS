@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+  <body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+      class Football extends React.Component {
+        constructor(props) {
+          super(props);
+          this.shoot = this.shoot.bind(this);
+        }
+        shoot() {
+          alert(this);
+          /*
+          Graças à ligação na função construtor,
+          a palavra-chave 'this' agora se refere ao objeto.
+          */
+        }
+        render() {
+          return <button onClick={this.shoot}>Take the shot!</button>;
+        }
+      }
+
+      ReactDOM.render(<Football />, document.getElementById("app"));
+    </script>
+  </body>
+</html>

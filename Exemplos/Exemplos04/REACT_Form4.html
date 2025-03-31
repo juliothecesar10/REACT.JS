@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+      class MyForm extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { username: "" };
+        }
+        mySubmitHandler = (event) => {
+          event.preventDefault();
+          alert("You are submitting " + this.state.username);
+        };
+        myChangeHandler = (event) => {
+          this.setState({ username: event.target.value });
+        };
+        render() {
+          return (
+            <form onSubmit={this.mySubmitHandler}>
+              <h1>Hello {this.state.username}</h1>
+              <p>Digite seu nome:, e submeta:</p>
+              <input type="text" onChange={this.myChangeHandler} />
+              <input type="submit" />
+            </form>
+          );
+        }
+      }
+
+      ReactDOM.render(<MyForm />, document.getElementById("app"));
+    </script>
+  </body>
+</html>

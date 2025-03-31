@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  
+  <body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+		class Car extends React.Component {
+		  constructor(props) {
+			super(props);
+			this.state = {
+			  brand: "Ford",
+			  model: "Mustang",
+			  color: "vermelho",
+			  year: 1964
+			};
+		  }
+		  render() {
+			return (
+			  <div>
+				<h1>My {this.state.brand}</h1>
+				<p>
+				  Ele é  {this.state.color}
+				  {this.state.model}
+				  do ano de  {this.state.year}.
+				</p>
+			  </div>
+			);
+		  }
+		}
+		
+		ReactDOM.render(<Car/>, document.getElementById('app'));
+    </script>
+  </body>
+</html>

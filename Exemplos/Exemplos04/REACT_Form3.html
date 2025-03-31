@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+      class MyForm extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { username: "" };
+        }
+        myChangeHandler = (event) => {
+          this.setState({ username: event.target.value });
+        };
+        render() {
+          let header = "";
+          if (this.state.username) {
+            header = <h1>Hello {this.state.username}</h1>;
+          } else {
+            header = "";
+          }
+          return (
+            <form>
+              {header}
+              <p>Digite seu nome:</p>
+              <input type="text" onChange={this.myChangeHandler} />
+            </form>
+          );
+        }
+      }
+
+      ReactDOM.render(<MyForm />, document.getElementById("app"));
+    </script>
+  </body>
+</html>

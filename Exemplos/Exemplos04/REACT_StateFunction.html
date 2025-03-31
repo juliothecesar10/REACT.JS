@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function Tick() {
+        const [time, setTime] = React.useState(new Date());
+
+        React.useEffect(() => {
+          const timer = setInterval(() => {
+            setTime(new Date());
+          }, 1000);
+
+          // Cleanup function to clear the interval when component unmounts
+          return () => clearInterval(timer);
+        }, []);
+
+        return (
+          <div>
+            <h1>Hello, world!</h1>
+            <h2>It is {time.toLocaleTimeString()}.</h2>
+          </div>
+        );
+      }
+
+      ReactDOM.render(<Tick />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

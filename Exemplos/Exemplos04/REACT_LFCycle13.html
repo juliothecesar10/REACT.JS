@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      class Clock extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            time: new Date(),
+            labelButton: "Parar Relogio!",
+          };
+        }
+
+        toggleClock = () => {
+          if (this.state.labelButton === "Parar Relogio!") {
+            this.setState({ labelButton: "Ligar Relogio!" });
+            clearInterval(this.timer);
+          } else {
+            this.setState({ labelButton: "Parar Relogio!" });
+            this.timer = setInterval(() => this.tick(), 1000);
+          }
+        };
+        // Assim que o relógio for montado.
+        // Comece o intervalo "timer".
+        // Chame tick () a cada segundo.
+        componentDidMount() {
+          this.timer = setInterval(() => this.tick(), 1000);
+        }
+
+        // Antes de desmontar o relógio,
+        // Limpa o intervalo "Timer"
+        // Esta é uma etapa eficiente de memória.
+        componentWillUnmount() {
+          clearInterval(this.timer);
+        }
+
+        // Esta função atualiza o state,
+        // invoca uma nova renderização a cada segundo.
+        tick() {
+          this.setState({
+            time: new Date(),
+          });
+        }
+
+        render() {
+          return (
+            <div>
+              <h1>Bem vindo ao {this.props.title} !</h1>
+              <h2>{this.state.time.toLocaleTimeString()}</h2>
+              <button type="button" onClick={this.toggleClock}>
+                {this.state.labelButton}
+              </button>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(
+        <Clock title="Relogio" />,
+        document.getElementById("root")
+      );
+    </script>
+  </body>
+</html>
