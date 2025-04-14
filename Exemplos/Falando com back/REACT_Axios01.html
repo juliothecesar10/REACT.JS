@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ReactJS Front-End</title>
+    <script
+      src="https://unpkg.com/react/umd/react.production.min.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <h1>ReactJS Front-End:</h1>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { useState } = React;
+
+      function App() {
+        const [data, setData] = useState(null);
+        const [error, setError] = useState("");
+
+        const getBackEnd = () => {
+          axios
+            .get("http://localhost:3000/teste")
+            .then((response) => {
+              setData(response.data);
+              setError(""); // Limpa qualquer erro anterior
+            })
+            .catch((error) => {
+              setError(error.message);
+              setData(null); // Limpa qualquer dado anterior
+            });
+        };
+
+        return (
+          <div>
+            <button onClick={getBackEnd}>Pegar dados</button>
+            <br />
+            <br />
+            <div>
+              <h3>Response Data:</h3>
+              <pre>{JSON.stringify(data, null, 2)}</pre>
+            </div>
+            <br />
+            <div>
+              <h3>Error:</h3>
+              <pre>{error}</pre>
+            </div>
+          </div>
+        );
+      }
+
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ReactJS Front-End</title>
+    <script
+      src="https://unpkg.com/react/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <h1>ReactJS Front-End:</h1>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { useState } = React;
+
+      function App() {
+        const [dados, setDados] = useState("");
+        const [error, setError] = useState("");
+
+        const postStudent = () => {
+          axios
+            .post("http://localhost:3000/teste", {
+              age: 29,
+              email: "maria@gmail.com",
+              name: "Maria",
+            })
+            .then((response) => {
+              setDados(response.data);
+              setError(""); // Limpa qualquer erro anterior
+            })
+            .catch((error) => {
+              setError(error.message);
+              setDados(""); // Limpa qualquer dado anterior
+            });
+        };
+
+        return (
+          <div>
+            <input type="button" value="Inserir dados" onClick={postStudent} />
+            <br />
+            <br />
+            Response Data: {dados} <br /> <br />
+            Error: {error}
+          </div>
+        );
+      }
+
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>
