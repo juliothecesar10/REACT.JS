@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  	<script src="https://unpkg.com/react@17/umd/react.development.js" ></script>
+		<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" ></script>
+		<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	</head>
+	<body>
+		<h1>REACT Front-End: </h1>
+        <div id="saida"></div>
+
+		<script type="text/babel">
+			function GetRequest() {
+				const [resposta, setResposta] = React.useState(null);
+
+				const getBackEnd = () => {
+					axios.get('http://localhost:3000/teste')
+						.then(response => {
+							const todoItems = response.data;
+							setResposta(todoItems);
+						})
+						.catch(error => console.error(error));
+				};
+
+				React.useEffect(() => {
+					// You can perform side effects here, like fetching data on component mount
+					// if you want it to happen automatically. For this example, it will happen
+					// only when the button is clicked.
+				}, []);
+
+				return (
+					<div>
+						<h5> Simple GET Request</h5>
+						<button type="button" onClick={getBackEnd}> Pegar Dados </button>
+						<br />
+						<br />
+						<div>
+							Retornado: {resposta}
+						</div>
+					</div>
+				);
+			}
+
+			ReactDOM.render(<GetRequest />, document.getElementById('saida'));
+		</script>
+	</body>
+</html>

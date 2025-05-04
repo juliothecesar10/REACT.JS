@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Frontend (Promise)</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        #root {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        #response {
+            font-weight: bold;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function App() {
+            const [message, setMessage] = React.useState('');
+            const [status, setStatus] = React.useState(null);
+
+            const fetchData = () => {
+                fetch('http://127.0.0.1:3000/teste')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        setMessage(data);
+                        setStatus('success');
+                    })
+                    .catch(error => {
+                        setMessage('Error fetching data: ' + error.message);
+                        setStatus('error');
+                        console.error("Fetch error:", error);
+                    });
+            };
+
+            return (
+                <>
+                    <h1>React Frontend to Node.js Backend (Promise)</h1>
+                    <button onClick={fetchData}>Fetch Data from Backend</button>
+                    {message && (
+                        <div id="response" className={status}>
+                            {message}
+                        </div>
+                    )}
+                </>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

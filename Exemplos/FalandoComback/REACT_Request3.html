@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Get Request</title>
+		<script src="https://unpkg.com/react@17/umd/react.development.js" ></script>
+		<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" ></script>
+		<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+		<style>
+
+		</style>
+
+		<script type="text/babel">
+			class GetRequest extends React.Component {
+				constructor(props) {
+					super(props);
+
+					this.state = { 
+						postId: null
+					};
+				}
+
+				componentDidMount() {
+					// Request simples usando PUT sem o body JSON
+					const requestOptions = {
+						method: 'GET',
+						headers: { 'Content-Type': 'application/json' }
+					};
+					fetch('https://jsonplaceholder.typicode.com/posts/1', requestOptions)
+						.then(response => response.json())
+						.then(data => this.setState({ postId: data.id }));
+				}
+
+				render() {
+					const { postId } = this.state;
+					return (
+						<div >
+							<h5 >Simple GET Request</h5>
+							<div >
+								Id Retornado: {postId}
+							</div>
+						</div>
+					);
+				}
+			}
+
+			ReactDOM.render(<GetRequest />,document.getElementById('saida'));
+		</script>
+	</head>
+	<body>
+		<div id="saida"></div>
+	</body>
+</html>

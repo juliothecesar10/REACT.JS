@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  	<script src="https://unpkg.com/react@17/umd/react.development.js" ></script>
+		<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" ></script>
+		<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	</head>
+	<body ng-app="myApp">
+		<h1>REACT Front-End: </h1>
+        <div id="saida"></div>
+
+		<script type="text/babel">
+			class GetRequest extends React.Component {
+				constructor(props) {
+					super(props);
+					this.state = {
+						resposta: null
+					};
+					this.getBackEnd = this.getBackEnd.bind(this);
+				}
+
+				getBackEnd() {
+					// Simple GET Request - removing Content-Type might help avoid preflight for GET
+					fetch('http://localhost:3000/teste')
+						.then(response => {
+							if (!response.ok) {
+								throw new Error(`HTTP error! status: ${response.status}`);
+							}
+							return response.text(); // Expecting plain text from your backend
+						})
+						.then(data => this.setState({ resposta: data }))
+						.catch(error => {
+							console.error("Fetch error:", error);
+							this.setState({ resposta: 'Erro ao buscar dados' });
+						});
+				}
+
+				render() {
+					const { resposta } = this.state;
+					return (
+						<div >
+							<h5> Simple GET Request</h5>
+							<button type="button" onClick={this.getBackEnd}> Pegar Dados </button>
+							<br />
+							<br />
+							<div>
+								Retornado: {this.state.resposta}
+							</div>
+						</div>
+					);
+				}
+			}
+
+			ReactDOM.render(<GetRequest />,document.getElementById('saida'));
+		</script>
+	</body>
+</html>
